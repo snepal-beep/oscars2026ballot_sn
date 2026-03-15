@@ -7,21 +7,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
-<!-- Firebase Compat SDK v9 — loads synchronously, no async module issues -->
+<!-- Firebase Compat SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
-const firebaseConfig = {
+firebase.initializeApp({
   apiKey: "AIzaSyCccKGBYdJQLTPYZojzpNr_f8Dc80lm6a8",
   authDomain: "oscars26ballot.firebaseapp.com",
   databaseURL: "https://oscars26ballot-default-rtdb.firebaseio.com",
   projectId: "oscars26ballot",
   storageBucket: "oscars26ballot.firebasestorage.app",
   messagingSenderId: "671084169649",
-  appId: "1:671084169649:web:961b802aa3768b4c201590",
-  measurementId: "G-1M6MSCTXFJ"
-};
-firebase.initializeApp(firebaseConfig);
+  appId: "1:671084169649:web:961b802aa3768b4c201590"
+});
 const _db = firebase.database();
 window._fb = {
   db: _db,
