@@ -1022,7 +1022,9 @@ function renderLeaderboard() {
   const scores = Object.values(players).map(p => {
     let pts = 0;
     Object.entries(winners).forEach(([catId, wi]) => {
-      if (p.picks && p.picks[catId] === wi) pts++;
+      const wiArr = typeof wi === 'object' ? Object.values(wi) : [wi];
+      if (p.picks && wiArr.includes(p.picks[catId])) pts++;
+
     });
     return { name: p.name, pts, submitted: p.submitted };
   }).sort((a,b) => b.pts - a.pts);
