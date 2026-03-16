@@ -985,7 +985,12 @@ async function revealWinner(catId) {
   const el = document.getElementById('ws-' + catId);
   const idx = parseInt(el.value);
   if (idx === -1) { showToast('Select a winner first'); return; }
-  await fb().update(dbRef(`rooms/${roomCode}/winners`), { [catId]: idx });
+  const tieCategories = ['live-short'];
+const currentWinner = (await fb().get(dbRef(`rooms/${roomCode}/winners/${catId}`))).val();
+const newVal = tieCategories.includes(catId) && currentWinner !== null && currentWinner !== undefined
+  ? (Array.isArray(currentWinner) ? [...currentWinner, idx] : [currentWinner, idx])
+  : idx;
+await fb().update(dbRef(`rooms/${roomCode}/winners`), { [catId]: newVal });
   const cat = CATEGORIES.find(c => c.id === catId);
   showToast(`✦ ${cat.nominees[idx].n} wins ${cat.name}!`);
   throwConfetti();
